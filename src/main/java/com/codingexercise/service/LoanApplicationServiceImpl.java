@@ -44,6 +44,10 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
     public LoanApplicationResponse evaluate(LoanApplicationRequest request) {
 
         LoanApplication entity = mapper.toEntity(request);
+        
+         if (repository.existsByApplicantName(request.getApplicant().getName())) {
+            throw new IllegalArgumentException("Applicant already exists");
+        }
 
         RiskBand riskBand = riskService.classify(
                 request.getApplicant().getCreditScore()
