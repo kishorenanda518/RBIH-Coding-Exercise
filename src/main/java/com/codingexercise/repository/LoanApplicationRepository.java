@@ -12,7 +12,7 @@ import java.util.UUID;
 @Repository
 public interface LoanApplicationRepository
         extends JpaRepository<LoanApplication, UUID> {
-
+ boolean existsByApplicantName(String applicantName);
 
     List<LoanApplication> findByStatus(LoanStatus status);
 
